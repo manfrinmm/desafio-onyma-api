@@ -1,0 +1,19 @@
+version: "3.6"
+
+services:
+  health-inn-db-postgres:
+    image: bitnami/postgresql:latest
+    restart: always
+    container_name: health-inn-db-postgres
+    ports:
+      - ${PG_PORT}:5432
+    environment:
+      POSTGRESQL_USERNAME: "${PG_USER}"
+      POSTGRESQL_PASSWORD: "${PG_PASSWORD}"
+      PGPASSWORD: "${PG_PASSWORD}"
+      POSTGRESQL_DATABASE: "${PG_DB_NAME}"
+    volumes:
+      - health-inn-volume:/bitnami/postgresql
+
+volumes:
+  health-inn-volume:
