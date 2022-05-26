@@ -14,7 +14,7 @@
       "@infra/*": ["infra/*"],
       "@config/*": ["config/*"]
     },
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,

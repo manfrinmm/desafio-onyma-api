@@ -1,46 +1,54 @@
-// UMA ENTIDADE SEMPRE DEVE SE AUTOVALIDAR
-import Entity from '../../@shared/entities/entity.abstract';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
-export default class Employee extends Entity {
+import Address from '@domain/addresses/entities/Address';
 
-  private _name: string = "";
-  private _active: boolean = false;
+@Entity('employees')
+export default class Employee {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-  constructor(id: string, name: string) {
-    super();
-    this._id = id
-    this._name = name;
-    this.validate();
-  }
+  @Column()
+  name: string;
 
-  get name(): string {
-    return this._name;
-  }
+  @Column()
+  cpf: string;
 
-  validate(): void {
-    if(this._name === '') {
-      throw new Error('name must be filled');
-    }
+  @Column()
+  rg: string;
 
-  }
+  @Column()
+  birth_date: string;
 
-  changeName(name: string): void {
-    this._name = name;
-    this.validate();
-  }
-  
-  activate() {
-    if (this._name === '') {
-      throw new Error('Name is mandatory to activate a employee');
-    }
-    this._active = true;
-  }
+  @Column()
+  email?: string;
 
-  deactivate() {
-    this._active = false;
-  }
+  @Column()
+  phone?: string;
 
-  isActive(): boolean {
-    return this._active;
-  }
+  @OneToOne(() => Address, { cascade: true })
+  @JoinColumn({ name: 'address_id' })
+  address: Address;
+
+  @Column()
+  address_id: number;
+
+  @Column()
+  department: string;
+
+  @Column()
+  role: string;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }

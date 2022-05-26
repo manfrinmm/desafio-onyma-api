@@ -1,19 +1,46 @@
 import { Request, Response } from 'express';
+
 import { container } from 'tsyringe';
-import FindEmployeeUseCase from '@application/usecases/employees/find/FindEmployeeUseCase';
 
-class EmployeesController {
+import CreateEmployeeUseCase from '@application/usecases/employees/create/CreateEmployeeUseCase';
+import ListEmployeeUseCase from '@application/usecases/employees/list/ListEmployeeUseCase';
+
+export default class EmployeesController {
   public async index(request: Request, response: Response): Promise<Response> {
-    const { name } = request.query;
+    const listEmployeeUseCase = container.resolve(ListEmployeeUseCase);
 
-    const findEmployeeUseCase = container.resolve(
-      FindEmployeeUseCase,
-    );
+    const employees = await listEmployeeUseCase.execute();
 
-    const employeeReturn = await findEmployeeUseCase.execute({});
+    return response.json(employees);
+  }
 
-    return response.status(200).json(employeeReturn);
+  public async store(request: Request, response: Response): Promise<Response> {
+    const {
+      name,
+      cpf,
+      rg,
+      birth_date,
+      email,
+      phone,
+      role,
+      department,
+      address,
+    } = request.body;
+
+    const createEmployeeUseCase = container.resolve(CreateEmployeeUseCase);
+
+    const employee = await createEmployeeUseCase.execute({
+      name,
+      cpf,
+      rg,
+      birth_date,
+      email,
+      phone,
+      role,
+      department,
+      address,
+    });
+
+    return response.status(201).json(employee);
   }
 }
-
-export default EmployeesController;
