@@ -6,8 +6,7 @@
   "scripts": {
     "lint": "eslint --fix --ext .js ./src/**",
     "typeorm": "tsnd --transpile-only -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "test": "npm run tsc -- --noEmit && jest",
-    "test2": "jest",
+    "test": "jest",
     "swagger-autogen": "node swagger.js",
     "dev": "ts-node-dev -r tsconfig-paths/register --transpile-only --ignore-watch node_modules src/infra/web/server.ts",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist  --copy-files",

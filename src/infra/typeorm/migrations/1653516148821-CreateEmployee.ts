@@ -19,14 +19,23 @@ export class CreateEmployee1653516148821 implements MigrationInterface {
           { name: 'birth_date', type: 'varchar' },
           { name: 'email', type: 'varchar', isNullable: true },
           { name: 'phone', type: 'varchar', isNullable: true },
-          { name: 'address_id', type: 'integer' },
           { name: 'department', type: 'varchar' },
           { name: 'role', type: 'varchar' },
+          { name: 'address_id', type: 'integer' },
+          { name: 'company_id', type: 'uuid' },
 
           { name: 'created_at', type: 'timestamp', default: 'now()' },
           { name: 'updated_at', type: 'timestamp', default: 'now()' },
         ],
         foreignKeys: [
+          {
+            name: 'EmployeeCompany',
+            columnNames: ['company_id'],
+            referencedTableName: 'companies',
+            referencedColumnNames: ['id'],
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
+          },
           {
             name: 'EmployeeAddress',
             columnNames: ['address_id'],
