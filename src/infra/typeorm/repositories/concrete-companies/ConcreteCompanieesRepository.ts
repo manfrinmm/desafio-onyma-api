@@ -26,23 +26,22 @@ export default class ConcreteCompaniesRepository
   }
 
   async find(id: string): Promise<Company | undefined> {
-    const company = await this.repository.findOne(id, {
-      relations: ['employees'],
-    });
+    const company = await this.repository.findOne({ id });
 
     return company;
   }
 
   async findAll(): Promise<Company[]> {
-    const company = await this.repository.find({
-      relations: ['employees'],
-    });
+    const company = await this.repository.find();
 
     return company;
   }
 
   async findByCnpj(cnpj: string): Promise<Company | undefined> {
-    const company = await this.repository.findOne({ cnpj });
+    const company = await this.repository.findOne(
+      { cnpj },
+      { relations: ['employees'] },
+    );
 
     return company;
   }

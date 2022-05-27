@@ -13,5 +13,6 @@ companiesRouter.post(
   validateCompanyCreatePayload,
   companiesController.store,
 );
+companiesRouter.get('/:cnpj', companiesController.show);
 
 export default companiesRouter;

@@ -11,7 +11,7 @@ import {
 @injectable()
 export default class CreateCompanyUseCase {
   constructor(
-    @inject('EmployeesRepository')
+    @inject('CompaniesRepository')
     private companiesRepository: ICompaniesRepositoryInterface,
   ) {}
 

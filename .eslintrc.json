@@ -44,6 +44,7 @@
     "no-plusplus": "off",
     "no-await-in-loop": "off",
     "no-restricted-globals": "off",
+    "import/no-cycle": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
       {
