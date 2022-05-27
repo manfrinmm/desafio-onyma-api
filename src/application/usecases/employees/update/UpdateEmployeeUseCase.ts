@@ -39,8 +39,6 @@ export default class UpdateEmployeeUseCase {
       }
     }
 
-    console.log(input.company_id, employee.company_id);
-
     if (employee.company_id !== input.company_id) {
       const companyExists = await this.companiesRepository.find(
         input.company_id,

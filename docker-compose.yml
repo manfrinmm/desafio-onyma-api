@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+  health-inn-db-postgres:
+    image: bitnami/postgresql:latest
+    restart: always
+    container_name: health-inn-db-postgres
+    ports:
+      - ${DB_PORT}:5432
+    environment:
+      POSTGRESQL_USERNAME: "${DB_USER}"
+      POSTGRESQL_PASSWORD: "${DB_PASSWORD}"
+      PGPASSWORD: "${DB_PASSWORD}"
+      POSTGRESQL_DATABASE: "${DB_DATABASE}"
+    volumes:
+      - health-inn-volume:/bitnami/postgresql
+
+  health-inn-api:
+    build: .
+    container_name: health-inn-api
+    restart: always
+    ports:
+      - ${PORT}:3333
+    volumes:
+      - .:/usr/app
+    links:
+      - health-inn-db-postgres
+    depends_on:
+      - health-inn-db-postgres
+
+volumes:
+  health-inn-volume:
