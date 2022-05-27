@@ -2,7 +2,10 @@ import { Router } from 'express';
 
 import EmployeesController from '@infra/web/employees/controllers/EmployeesController';
 
-import { validateEmployeeCreatePayload } from '../validators/EmployeeValidator';
+import {
+  validateEmployeeCreatePayload,
+  validateEmployeeUpdatePayload,
+} from '../validators/EmployeeValidator';
 
 const employeesRouter = Router();
 
@@ -14,5 +17,12 @@ employeesRouter.post(
   validateEmployeeCreatePayload,
   employeesController.store,
 );
+employeesRouter.get('/:cpf', employeesController.show);
+employeesRouter.put(
+  '/:id',
+  validateEmployeeUpdatePayload,
+  employeesController.update,
+);
+employeesRouter.delete('/:cpf', employeesController.delete);
 
 export default employeesRouter;

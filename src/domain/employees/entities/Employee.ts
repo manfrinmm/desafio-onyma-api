@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 
 import Address from '@domain/addresses/entities/Address';
+import Company from '@domain/companies/entities/Company';
 
 @Entity('employees')
 export default class Employee {
@@ -39,6 +40,13 @@ export default class Employee {
 
   @Column()
   address_id: number;
+
+  @OneToOne(() => Company)
+  @JoinColumn({ name: 'company_id' })
+  company: Company;
+
+  @Column()
+  company_id: string;
 
   @Column()
   department: string;

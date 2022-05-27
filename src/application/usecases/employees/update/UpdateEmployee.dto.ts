@@ -1,4 +1,5 @@
 type IInputAddressDTO = {
+  id: number;
   country: string;
   state: string;
   city: string;
@@ -9,7 +10,7 @@ type IInputAddressDTO = {
   complement?: string;
 };
 
-type ICreateEmployeeDTO = {
+type IUpdateEmployeeDTO = {
   name: string;
   cpf: string;
   rg: string;
@@ -20,20 +21,20 @@ type ICreateEmployeeDTO = {
   company_id: string;
 };
 
-interface ICreateEmployeeWithEmailDTO extends ICreateEmployeeDTO {
+interface IUpdateEmployeeWithEmailDTO extends IUpdateEmployeeDTO {
   email: string;
   phone?: string;
 }
-interface ICreateEmployeeWithPhoneDTO extends ICreateEmployeeDTO {
+interface IUpdateEmployeeWithPhoneDTO extends IUpdateEmployeeDTO {
   phone: string;
   email?: string;
 }
 
-export type IInputCreateEmployeeDTO =
-  | ICreateEmployeeWithEmailDTO
-  | ICreateEmployeeWithPhoneDTO;
+export type IInputUpdateEmployeeDTO =
+  | IUpdateEmployeeWithEmailDTO
+  | IUpdateEmployeeWithPhoneDTO;
 
-export interface IOutputCreateEmployeeDTO extends ICreateEmployeeDTO {
+export interface IOutputUpdateEmployeeDTO extends IUpdateEmployeeDTO {
   id: string;
   created_at: Date;
   updated_at: Date;

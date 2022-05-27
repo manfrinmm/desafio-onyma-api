@@ -7,7 +7,6 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-// eslint-disable-next-line import/no-cycle
 import Employee from '@domain/employees/entities/Employee';
 
 @Entity('companies')
